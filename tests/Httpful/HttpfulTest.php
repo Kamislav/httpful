@@ -92,7 +92,7 @@ X-My-Header:Value2\r\n";
         // Our current defaults are as follows
         $r = Request::init();
         $this->assertEquals(Http::GET, $r->method);
-        $this->assertFalse($r->strict_ssl);
+        $this->assertTrue($r->strict_ssl);
     }
 
     function testShortMime()

@@ -13,6 +13,22 @@ Features
  - Basic Auth
  - Client Side Certificate Auth
  - Request "Templates"
+ - TLS certificate verification enabled by default
+
+# TLS certificate verification
+
+Requests verify the peer certificate and the host name by default
+(`CURLOPT_SSL_VERIFYPEER` and `CURLOPT_SSL_VERIFYHOST`). Verification can be
+turned off per request, or globally through a request template, but doing so
+exposes the connection to man-in-the-middle attacks:
+
+```php
+// per request (not recommended)
+$response = Request::get($uri)->withoutStrictSSL()->send();
+
+// globally (not recommended)
+Request::ini(Request::init()->withoutStrictSSL());
+```
 
 # Sneak Peak
 
@@ -71,6 +87,10 @@ Httpful highly encourages sending in pull requests.  When submitting a pull requ
  - Include commenting where appropriate and add a descriptive pull request message
 
 # Changelog
+## Unreleased
+
+ - SECURITY TLS certificate verification is now on by default; use `withoutStrictSSL()` to opt out
+
 ## 0.2.11
 
  - FIX [I #99](https://github.com/nategood/httpful/pull/99) Prevent hanging on HEAD requests
