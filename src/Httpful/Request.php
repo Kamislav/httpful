@@ -32,7 +32,7 @@ class Request
            $method                  = Http::GET,
            $headers                 = array(),
            $raw_headers             = '',
-           $strict_ssl              = false,
+           $strict_ssl              = true,
            $content_type,
            $expected_type,
            $additional_curl_opts    = array(),
@@ -707,7 +707,7 @@ class Request
 
         // This is more like it...
         self::$_template
-            ->withoutStrictSSL();
+            ->withStrictSSL();
     }
 
     /**
